@@ -1,0 +1,38 @@
+# Environments
+venv/
+env/
+.env
+.venv
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Data (ignore raw and intermediate data, maybe keep small processed data if needed, but safe to ignore all by default)
+data/raw/
+data/processed/
+
+# Models and Checkpoints
+models/
+*.pt
+*.pth
+*.h5
+*.ckpt
+
+# Output directories
+outputs/
+outputs/figures/
+outputs/logs/
+outputs/tables/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# VS Code / IDEs
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
