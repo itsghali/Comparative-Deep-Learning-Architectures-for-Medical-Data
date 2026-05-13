@@ -1,5 +1,4 @@
-  
-EMSI — École Marocaine des Sciences de l’Ingénieur
+EMSI — École Marocaine des Sciences de l'Ingénieur
 
 Module : Deep Learning
 
@@ -7,7 +6,7 @@ Année universitaire 2025–2026
 
 RAPPORT DE PROJET
 
-**Guide de Référence pour l’Entraînement**
+**Guide de Référence pour l'Entraînement**
 
 **de Modèles de Deep Learning**
 
@@ -24,7 +23,7 @@ MLP • CNN • RNN • LSTM • GRU • Architectures Hybrides
 
 [1\. Introduction	4](#1.-introduction)
 
-[1.1 Vue d’ensemble des architectures	4](#1.1-vue-d’ensemble-des-architectures)
+[1.1 Vue d'ensemble des architectures	4](#1.1-vue-d'ensemble-des-architectures)
 
 [2\. Préparation des données	5](#2.-préparation-des-données)
 
@@ -46,13 +45,13 @@ MLP • CNN • RNN • LSTM • GRU • Architectures Hybrides
 
 [3.1.1 Structure type	7](#3.1.1-structure-type)
 
-[3.1.2 Points d’attention	7](#3.1.2-points-d’attention)
+[3.1.2 Points d'attention	7](#3.1.2-points-d'attention)
 
 [3.2 Réseaux de Neurones Convolutifs (CNN)	8](#3.2-réseaux-de-neurones-convolutifs-\(cnn\))
 
 [3.2.1 Structure type (CNN personnalisé)	8](#3.2.1-structure-type-\(cnn-personnalisé\))
 
-[3.2.2 Transfert d’apprentissage	8](#3.2.2-transfert-d’apprentissage)
+[3.2.2 Transfert d'apprentissage	8](#3.2.2-transfert-d'apprentissage)
 
 [3.2.3 Augmentation de données	8](#3.2.3-augmentation-de-données)
 
@@ -70,7 +69,7 @@ MLP • CNN • RNN • LSTM • GRU • Architectures Hybrides
 
 [3.4.3 Stratégies de fusion	10](#3.4.3-stratégies-de-fusion)
 
-[4\. Processus d’entraînement	11](#4.-processus-d’entraînement)
+[4\. Processus d'entraînement	11](#4.-processus-d'entraînement)
 
 [4.1 Fonctions de perte	11](#4.1-fonctions-de-perte)
 
@@ -92,15 +91,15 @@ MLP • CNN • RNN • LSTM • GRU • Architectures Hybrides
 
 [5.1.3 RNN / LSTM / GRU	13](#5.1.3-rnn-/-lstm-/-gru)
 
-[5.2 Stratégies de recherche d’hyperparammètres	13](#5.2-stratégies-de-recherche-d’hyperparammètres)
+[5.2 Stratégies de recherche d'hyperparammètres	13](#5.2-stratégies-de-recherche-d'hyperparammètres)
 
-[6\. Métriques d’évaluation	15](#6.-métriques-d’évaluation)
+[6\. Métriques d'évaluation	15](#6.-métriques-d'évaluation)
 
 [6.1 Métriques de classification	15](#6.1-métriques-de-classification)
 
 [6.2 Visualisations obligatoires	15](#6.2-visualisations-obligatoires)
 
-[6.3 Diagnostic par les courbes d’apprentissage	15](#6.3-diagnostic-par-les-courbes-d’apprentissage)
+[6.3 Diagnostic par les courbes d'apprentissage	15](#6.3-diagnostic-par-les-courbes-d'apprentissage)
 
 [7\. Interprétabilité des modèles	17](#7.-interprétabilité-des-modèles)
 
@@ -110,7 +109,7 @@ MLP • CNN • RNN • LSTM • GRU • Architectures Hybrides
 
 [8.2 Erreurs fréquentes	18](#8.2-erreurs-fréquentes)
 
-[8.3 Structure type du code d’entraînement	18](#8.3-structure-type-du-code-d’entraînement)
+[8.3 Structure type du code d'entraînement	18](#8.3-structure-type-du-code-d'entraînement)
 
 [9\. Guide de rédaction du rapport	20](#9.-guide-de-rédaction-du-rapport)
 
@@ -118,7 +117,7 @@ MLP • CNN • RNN • LSTM • GRU • Architectures Hybrides
 
 [9.2 Critères de qualité rédactionnelle	20](#9.2-critères-de-qualité-rédactionnelle)
 
-[9.3 Ce qu’il faut éviter	20](#9.3-ce-qu’il-faut-éviter)
+[9.3 Ce qu'il faut éviter	20](#9.3-ce-qu'il-faut-éviter)
 
 [10\. Références bibliographiques recommandées	22](#10.-références-bibliographiques-recommandées)
 
@@ -128,258 +127,258 @@ MLP • CNN • RNN • LSTM • GRU • Architectures Hybrides
 
 # **1\. Introduction** {#1.-introduction}
 
-Ce guide de référence présente la méthodologie complète pour l’entraînement de modèles de deep learning, couvrant les architectures fondamentales (MLP, CNN, RNN, LSTM, GRU) ainsi que les architectures hybrides. Il constitue un cadre méthodologique que l’étudiant doit adapter à son propre projet.
+Méthodologie complète pour entraînement modèles deep learning. Couvre architectures fondamentales (MLP, CNN, RNN, LSTM, GRU) + hybrides. Cadre méthodologique à adapter au projet étudiant.
 
-L’objectif est de fournir une démarche structurée et reproductible, depuis la préparation des données jusqu’à l’analyse critique des résultats, en passant par le choix d’architecture, l’optimisation des hyperparammètres et l’interprétation des modèles.
+Démarche structurée et reproductible : données → architecture → hyperparamètres → optimisation → interprétation.
 
-## **1.1 Vue d’ensemble des architectures** {#1.1-vue-d’ensemble-des-architectures}
+## **1.1 Vue d'ensemble des architectures** {#1.1-vue-d'ensemble-des-architectures}
 
-| Architecture | Données cibles | Biais inductif | Cas d’usage typique |
+| Architecture | Données cibles | Biais inductif | Cas d'usage typique |
 | ----- | :---: | :---: | :---: |
-| MLP | Tabulaires | Aucun | Classification/régression sur features structurées |
-| CNN | Images, grilles 2D | Spatial (localité) | Classification d’images, détection d’objets |
+| MLP | Tabulaires | Aucun | Classification/régression features structurées |
+| CNN | Images, grilles 2D | Spatial (localité) | Classification images, détection objets |
 | RNN | Séquences courtes | Temporel (ordre) | NLP simple, séries courtes |
-| LSTM | Séquences longues | Temporel (mémoire longue) | Traduction, analyse de signaux |
-| GRU | Séquences longues | Temporel (simplifié) | Alternative légère au LSTM |
-| Hybride (CNN+LSTM) | Spatio-temporel | Spatial \+ Temporel | Vidéo, signaux multicanaux |
+| LSTM | Séquences longues | Temporel (mémoire longue) | Traduction, analyse signaux |
+| GRU | Séquences longues | Temporel (simplifié) | Alternative légère LSTM |
+| Hybride (CNN+LSTM) | Spatio-temporel | Spatial + Temporel | Vidéo, signaux multicanaux |
 
 # **2\. Préparation des données** {#2.-préparation-des-données}
 
 ## **2.1 Exploration et compréhension du dataset** {#2.1-exploration-et-compréhension-du-dataset}
 
-Avant toute modélisation, une exploration approfondie du dataset est indispensable. Cette phase doit couvrir les points suivants :
+Exploration approfondie indispensable avant modélisation. Points clés :
 
-* Description générale : nombre d’échantillons, nombre de variables/features, type de chaque variable (numérique, catégorielle, ordinale).
+* Description générale : nb échantillons, nb variables/features, type (numérique, catégoriel, ordinal).
 
-* Distribution de la variable cible : vérifier l’équilibre des classes et quantifier le ratio de déséquilibre.
+* Distribution cible : équilibre classes, ratio déséquilibre.
 
-* Statistiques descriptives : moyenne, médiane, écart-type, min/max pour les variables numériques.
+* Stats descriptives : moyenne, médiane, écart-type, min/max (variables numériques).
 
-* Valeurs manquantes : cartographier les taux de données manquantes par variable.
+* Valeurs manquantes : taux par variable.
 
-* Corrélations : matrice de corrélation pour identifier les redondances et les relations linéaires.
+* Corrélations : matrice, identifier redondances et relations linéaires.
 
-* Visualisations : histogrammes, boxplots, pairplots, heatmaps de corrélation.
+* Visualisations : histogrammes, boxplots, pairplots, heatmaps corrélation.
 
-**Conseil :** Toujours visualiser les données avant de coder le modèle. Un simple histogramme peut révéler un déséquilibre critique ou une distribution inattendue.
+**Conseil :** Visualiser avant coder. Histogramme révèle déséquilibres critiques ou distributions inattendues.
 
 ## **2.2 Prétraitement** {#2.2-prétraitement}
 
 ### **2.2.1 Données tabulaires (MLP)** {#2.2.1-données-tabulaires-(mlp)}
 
-1. Gestion des valeurs manquantes : imputation par la médiane (numérique) ou le mode (catégorielle). Pour les taux supérieurs à 40%, envisager la suppression de la variable.
+1. Valeurs manquantes : imputation médiane (numériques) ou mode (catégorique). Taux > 40% → supprimer variable.
 
-2. Encodage des variables catégorielles : One-Hot Encoding pour les variables nominales (≤ 10 catégories), Label Encoding pour les ordinales, Target Encoding si cardinalité élevée.
+2. Encodage catégorique : One-Hot (≤10 catégories), Label Encoding (ordinales), Target Encoding (cardinalité haute).
 
-3. Normalisation/Standardisation : StandardScaler (z-score) ou MinMaxScaler selon la distribution. Appliquer après le split pour éviter le data leakage.
+3. Normalisation/Standardisation : StandardScaler (z-score) ou MinMaxScaler. Appliquer après split (data leakage).
 
-4. Sélection de features : suppression des variables à variance nulle, analyse de corrélation, feature importance préliminaire.
+4. Sélection features : suppression variance nulle, analyse corrélation, feature importance.
 
-**Attention :** Toujours fitter le scaler sur le train set uniquement, puis transformer train, validation et test avec le même scaler. Fitter sur l’ensemble complet constitue un data leakage.
+**Attention :** Fitter scaler sur train set uniquement. Transformer train/validation/test avec même scaler. Fitter ensemble = data leakage.
 
 ### **2.2.2 Images (CNN)** {#2.2.2-images-(cnn)}
 
-1. Redimensionnement : taille uniforme (ex. 224×224 ou 256×256). Choisir en fonction de la mémoire GPU disponible.
+1. Redimensionnement : taille uniforme (224×224, 256×256). Choisir selon GPU disponible.
 
-2. Normalisation : mise à l’échelle \[0, 1\], puis normalisation par la moyenne et l’écart-type (ImageNet si transfert d’apprentissage : mean=\[0.485, 0.456, 0.406\], std=\[0.229, 0.224, 0.225\]).
+2. Normalisation : [0,1], puis moyenne/écart-type (ImageNet si transfert : mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]).
 
-3. Augmentation de données (train uniquement) : rotations, retournements, recadrage aléatoire, ajustement de luminosité/contraste, ajout de bruit gaussien.
+3. Augmentation (train) : rotations, retournements, recadrage aléatoire, luminosité/contraste, bruit gaussien.
 
-4. Conversion de format : DICOM vers PNG/JPG si nécessaire, gestion des canaux (niveaux de gris → 3 canaux pour les modèles pré-entraînés).
+4. Format : DICOM→PNG/JPG si besoin, gestion canaux (gris→3 canaux modèles pré-entraînés).
 
 ### **2.2.3 Séquences/Signaux (RNN/LSTM/GRU)** {#2.2.3-séquences/signaux-(rnn/lstm/gru)}
 
-1. Rééchantillonnage : uniformiser la fréquence d’échantillonnage (ex. 500 Hz → 100 Hz pour réduire la complexité).
+1. Rééchantillonnage : fréquence uniforme (ex. 500 Hz → 100 Hz réduire complexité).
 
-2. Segmentation : découpage en fenêtres de taille fixe (avec ou sans recouvrement).
+2. Segmentation : fenêtres taille fixe (avec/sans recouvrement).
 
-3. Normalisation : z-score par canal/variable ou normalisation min-max par séquence.
+3. Normalisation : z-score par canal ou min-max par séquence.
 
-4. Padding/Troncature : uniformiser la longueur des séquences (padding avec zéros ou troncature).
+4. Padding/Troncature : longueur uniforme (padding zéros ou troncature).
 
-5. Gestion du bruit : filtrage passe-bande si nécessaire, suppression des artefacts.
+5. Bruit : filtrage passe-bande si besoin, suppression artefacts.
 
 ## **2.3 Séparation des données** {#2.3-séparation-des-données}
 
 | Ensemble | Proportion | Rôle | Précautions |
 | ----- | :---: | :---: | :---: |
-| Train | 70–80% | Entraînement du modèle | Stratified split obligatoire |
-| Validation | 10–15% | Tuning des hyperparammètres | Jamais utilisé pour le gradient |
-| Test | 10–15% | Évaluation finale unique | Isolé jusqu’à l’évaluation finale |
+| Train | 70–80% | Entraînement modèle | Stratified split obligatoire |
+| Validation | 10–15% | Tuning hyperparamètres | Jamais gradient |
+| Test | 10–15% | Évaluation finale unique | Isolé jusqu'final |
 
-**Attention :** Le test set ne doit être utilisé qu’une seule fois, pour l’évaluation finale. Toute utilisation répétée pour ajuster le modèle constitue un overfitting indirect.
+**Attention :** Test set = une seule utilisation. Réutilisation = overfitting indirect.
 
 # **3\. Architectures en détail** {#3.-architectures-en-détail}
 
 ## **3.1 Perceptron Multicouche (MLP)** {#3.1-perceptron-multicouche-(mlp)}
 
-Le MLP est l’architecture la plus directe pour les données tabulaires. Chaque neurone d’une couche est connecté à tous les neurones de la couche suivante (fully connected). La sortie d’un neurone est : y \= f(Wᵀx \+ b).
+MLP : connectivité totale chaque couche. Neurone : y = f(Wᵀx + b).
 
 ### **3.1.1 Structure type** {#3.1.1-structure-type}
 
 | Couche | Type | Paramètres | Remarques |
 | ----- | :---: | :---: | :---: |
-| Entrée | Linear | n\_features → 128 | Dimension \= nombre de variables |
-| Cachée 1 | Linear \+ ReLU \+ BN \+ Dropout | 128 → 64 | BatchNorm avant ou après ReLU |
-| Cachée 2 | Linear \+ ReLU \+ BN \+ Dropout | 64 → 32 | Dropout \= 0.2 à 0.5 |
-| Sortie | Linear \+ Sigmoid/Softmax | 32 → n\_classes | Sigmoid (binaire) / Softmax (multi-classe) |
+| Entrée | Linear | n_features → 128 | Dimension = nb variables |
+| Cachée 1 | Linear + ReLU + BN + Dropout | 128 → 64 | BatchNorm avant/après ReLU |
+| Cachée 2 | Linear + ReLU + BN + Dropout | 64 → 32 | Dropout = 0.2-0.5 |
+| Sortie | Linear + Sigmoid/Softmax | 32 → n_classes | Sigmoid (binaire) / Softmax (multi) |
 
-### **3.1.2 Points d’attention** {#3.1.2-points-d’attention}
+### **3.1.2 Points d'attention** {#3.1.2-points-d'attention}
 
-* Architecture en entonnoir : réduire progressivement la dimension (ex. 256 → 128 → 64 → 32).
+* Architecture entonnoir : réduire progressivement (256 → 128 → 64 → 32).
 
-* Ne pas aller trop profond : 2 à 4 couches cachées suffisent généralement pour les données tabulaires.
+* Profondeur : 2-4 couches cachées suffisent données tabulaires.
 
-* Batch Normalization : stabilise et accélère l’entraînement.
+* BatchNormalization : stabilise, accélère entraînement.
 
-* Dropout : régularisation essentielle pour éviter le surapprentissage. Commencer à 0.3.
+* Dropout : régularisation essentielle overfitting. Débuter 0.3.
 
-* Fonction de perte : BCEWithLogitsLoss (binaire) ou CrossEntropyLoss (multi-classe).
+* Loss : BCEWithLogitsLoss (binaire) ou CrossEntropyLoss (multi).
 
 ## **3.2 Réseaux de Neurones Convolutifs (CNN)** {#3.2-réseaux-de-neurones-convolutifs-(cnn)}
 
-Les CNN exploitent la structure spatiale des images grâce à la convolution (partage de poids, invariance par translation). Un bloc convolutif typique comprend : Conv2d → BatchNorm → ReLU → MaxPool.
+CNN exploite structure spatiale images. Convolution : partage poids, invariance translation. Bloc type : Conv2d → BatchNorm → ReLU → MaxPool.
 
 ### **3.2.1 Structure type (CNN personnalisé)** {#3.2.1-structure-type-(cnn-personnalisé)}
 
 | Bloc | Opérations | Entrée → Sortie | Remarques |
 | ----- | :---: | :---: | :---: |
-| Bloc 1 | Conv(3×3, 32\) \+ BN \+ ReLU \+ MaxPool(2) | 1×256×256 → 32×128×128 | Filtres larges en début |
-| Bloc 2 | Conv(3×3, 64\) \+ BN \+ ReLU \+ MaxPool(2) | 32×128×128 → 64×64×64 | Doubler les filtres |
-| Bloc 3 | Conv(3×3, 128\) \+ BN \+ ReLU \+ MaxPool(2) | 64×64×64 → 128×32×32 | Augmenter la profondeur |
-| Bloc 4 | Conv(3×3, 256\) \+ BN \+ ReLU \+ AdaptiveAvgPool | 128×32×32 → 256×1×1 | Global pooling en sortie |
-| Classif. | Linear(256, 128\) \+ ReLU \+ Dropout \+ Linear(128, 1\) | 256 → 1 | Couches denses finales |
+| Bloc 1 | Conv(3×3, 32) + BN + ReLU + MaxPool(2) | 1×256×256 → 32×128×128 | Filtres larges début |
+| Bloc 2 | Conv(3×3, 64) + BN + ReLU + MaxPool(2) | 32×128×128 → 64×64×64 | Doubler filtres |
+| Bloc 3 | Conv(3×3, 128) + BN + ReLU + MaxPool(2) | 64×64×64 → 128×32×32 | Augmenter profondeur |
+| Bloc 4 | Conv(3×3, 256) + BN + ReLU + AdaptiveAvgPool | 128×32×32 → 256×1×1 | Global pooling |
+| Classif. | Linear(256, 128) + ReLU + Dropout + Linear(128, 1) | 256 → 1 | Couches denses finales |
 
-### **3.2.2 Transfert d’apprentissage** {#3.2.2-transfert-d’apprentissage}
+### **3.2.2 Transfert d'apprentissage** {#3.2.2-transfert-d'apprentissage}
 
-Le transfert d’apprentissage consiste à réutiliser un modèle pré-entraîné (ResNet, VGG, EfficientNet) et à adapter les dernières couches à la tâche cible. Deux stratégies principales :
+Réutiliser modèle pré-entraîné (ResNet, VGG, EfficientNet). Adapter dernières couches. Deux stratégies :
 
-* Feature extraction : geler toutes les couches convolutives, ne réentraîner que le classifieur. Rapide, efficace avec peu de données.
+* Feature extraction : geler convolutions, réentraîner classifieur. Rapide, peu données.
 
-* Fine-tuning : dégeler progressivement les dernières couches convolutives. Plus performant mais nécessite plus de données et un learning rate faible (1e-4 à 1e-5).
+* Fine-tuning : dégeler progressivement dernières convolutions. Performant, plus données, lr faible (1e-4 à 1e-5).
 
-**Conseil :** Pour le fine-tuning, utiliser un learning rate différentiel : lr faible pour les couches pré-entraînées (1e-5), lr plus élevé pour le classifieur (1e-3).
+**Conseil :** Fine-tuning → lr différentiel : 1e-5 couches pré-entraînées, 1e-3 classifieur.
 
 ### **3.2.3 Augmentation de données** {#3.2.3-augmentation-de-données}
 
-| Transformation | Paramètres typiques | Quand l’utiliser |
+| Transformation | Paramètres typiques | Quand l'utiliser |
 | ----- | :---: | :---: |
-| RandomHorizontalFlip | p=0.5 | Toujours (sauf si orientation est discriminante) |
-| RandomRotation | degrees=15–30 | Images sans orientation fixe |
-| RandomResizedCrop | scale=(0.8, 1.0) | Pour simuler des variations de cadrage |
-| ColorJitter | brightness=0.2, contrast=0.2 | Images couleur (pas niveaux de gris) |
-| GaussianBlur | kernel\_size=3 | Pour robustesse au bruit d’acquisition |
-| RandomAffine | translate=(0.1, 0.1) | Pour simuler des décalages spatiaux |
+| RandomHorizontalFlip | p=0.5 | Toujours (sauf orientation discriminante) |
+| RandomRotation | degrees=15–30 | Sans orientation fixe |
+| RandomResizedCrop | scale=(0.8, 1.0) | Variations cadrage |
+| ColorJitter | brightness=0.2, contrast=0.2 | Images couleur (pas gris) |
+| GaussianBlur | kernel_size=3 | Robustesse bruit acquisition |
+| RandomAffine | translate=(0.1, 0.1) | Décalages spatiaux |
 
 ## **3.3 Réseaux Récurrents (RNN, LSTM, GRU)** {#3.3-réseaux-récurrents-(rnn,-lstm,-gru)}
 
-Les architectures récurrentes traitent des données séquentielles en maintenant un état caché qui se propage dans le temps. Le RNN simple souffre de la disparition du gradient sur les longues séquences, ce qui a motivé le développement du LSTM et du GRU.
+Architectures récurrentes traitent séquences. État caché se propage temps. RNN simple : disparition gradient longues séquences. LSTM/GRU : solution.
 
 ### **3.3.1 Comparaison des variantes** {#3.3.1-comparaison-des-variantes}
 
 | Critère | RNN simple | LSTM | GRU |
 | ----- | :---: | :---: | :---: |
-| État interne | 1 état caché (h) | 2 états (h \+ cellule c) | 1 état caché (h) |
+| État interne | 1 (h) | 2 (h + cellule c) | 1 (h) |
 | Portes | Aucune | 3 (entrée, oubli, sortie) | 2 (reset, update) |
-| Paramètres | Le moins | Le plus | Intermédiaire |
+| Paramètres | Moins | Plus | Intermédiaire |
 | Mémoire longue | Faible | Excellente | Très bonne |
-| Vitesse d’entraînement | Le plus rapide | Le plus lent | Intermédiaire |
-| Quand l’utiliser | Prototypage rapide | Séquences longues, défaut | Compromis performance/vitesse |
+| Vitesse | Plus rapide | Plus lent | Intermédiaire |
+| Quand utiliser | Prototypage rapide | Séquences longues (défaut) | Compromis perf/vitesse |
 
 ### **3.3.2 Configuration type (LSTM)** {#3.3.2-configuration-type-(lstm)}
 
 | Paramètre | Valeur recommandée | Remarques |
 | ----- | :---: | :---: |
-| input\_size | Nombre de features par timestep | Ex. 12 pour ECG 12 dérivations |
-| hidden\_size | 64 à 256 | Commencer à 128 |
-| num\_layers | 1 à 3 | 2 couches \= bon compromis |
-| bidirectional | True | Capture le contexte passé et futur |
-| dropout | 0.2 à 0.5 | Entre les couches LSTM (num\_layers \> 1\) |
-| batch\_first | True | Convention PyTorch : (batch, seq, features) |
+| input_size | Nb features timestep | Ex. 12 (ECG 12 dérivations) |
+| hidden_size | 64-256 | Débuter 128 |
+| num_layers | 1-3 | 2 couches = bon compromis |
+| bidirectional | True | Contexte passé + futur |
+| dropout | 0.2-0.5 | Entre couches LSTM (num_layers > 1) |
+| batch_first | True | Convention PyTorch : (batch, seq, features) |
 
-**Note :** Pour la classification, on utilise généralement le dernier état caché (ou la concaténation forward \+ backward si bidirectionnel) passé à une couche dense.
+**Note :** Classification → dernier état caché (ou concat forward+backward si bidirectionnel) → couche dense.
 
 ## **3.4 Architectures hybrides** {#3.4-architectures-hybrides}
 
-Les architectures hybrides combinent les forces de plusieurs familles de réseaux pour traiter des données présentant des structures multiples (spatiale \+ temporelle, par exemple).
+Combinent forces plusieurs familles. Traitent données structures multiples (spatial + temporel).
 
-### **3.4.1 CNN \+ LSTM** {#3.4.1-cnn-+-lstm}
+### **3.4.1 CNN + LSTM** {#3.4.1-cnn-+-lstm}
 
-Cette architecture utilise un CNN comme extracteur de features spatiales, puis un LSTM pour capturer les dépendances temporelles. Cas d’usage typiques : classification de vidéos, analyse de signaux multicanaux avec structure spatiale.
+CNN extracteur features spatiales. LSTM capture dépendances temporelles. Cas d'usage : vidéos, signaux multicanaux structure spatiale.
 
-**Pipeline :** Entrée (batch, seq\_len, C, H, W) → CNN par timestep → (batch, seq\_len, n\_features) → LSTM → (batch, hidden) → Dense → Prédiction.
+**Pipeline :** Entrée (batch, seq_len, C, H, W) → CNN timestep → (batch, seq_len, n_features) → LSTM → (batch, hidden) → Dense → Prédiction.
 
-### **3.4.2 CNN \+ MLP (Fusion multimodale)** {#3.4.2-cnn-+-mlp-(fusion-multimodale)}
+### **3.4.2 CNN + MLP (Fusion multimodale)** {#3.4.2-cnn-+-mlp-(fusion-multimodale)}
 
-Pour combiner des données hétérogènes (ex. image \+ données tabulaires), on extrait des embeddings de chaque branche puis on les concatène avant une couche de décision.
+Données hétérogènes (image + tabulaires). Extraire embeddings chaque branche → concaténer → décision.
 
-**Pipeline :** Branche image (CNN → embedding) \+ Branche tabulaire (MLP → embedding) → Concaténation → Dense → Prédiction.
+**Pipeline :** Branche image (CNN → embedding) + Branche tabulaire (MLP → embedding) → Concaténation → Dense → Prédiction.
 
 ### **3.4.3 Stratégies de fusion** {#3.4.3-stratégies-de-fusion}
 
 | Stratégie | Description | Avantages | Inconvénients |
 | ----- | :---: | :---: | :---: |
-| Early fusion | Concaténation des données brutes en entrée | Simple à implémenter | Dimensions incompatibles |
-| Late fusion | Concaténation des embeddings avant la décision | Flexible, modulaire | Interactions limitées |
-| Intermediate fusion | Fusion à un niveau intermédiaire du réseau | Interactions riches | Plus complexe à concevoir |
-| Attention-based | Mécanisme d’attention cross-modal | Pondération adaptative | Coût computationnel élevé |
+| Early fusion | Concaténation données brutes entrée | Simple | Dimensions incompatibles |
+| Late fusion | Concaténation embeddings avant décision | Flexible, modulaire | Interactions limitées |
+| Intermediate fusion | Fusion niveau intermédiaire | Interactions riches | Plus complexe |
+| Attention-based | Mécanisme attention cross-modal | Pondération adaptative | Coût computationnel |
 
-# **4\. Processus d’entraînement** {#4.-processus-d’entraînement}
+# **4\. Processus d'entraînement** {#4.-processus-d'entraînement}
 
 ## **4.1 Fonctions de perte** {#4.1-fonctions-de-perte}
 
-| Tâche | Fonction de perte PyTorch | Activation de sortie | Quand l’utiliser |
+| Tâche | Fonction de perte PyTorch | Activation sortie | Quand l'utiliser |
 | ----- | :---: | :---: | :---: |
 | Classification binaire | nn.BCEWithLogitsLoss() | Aucune (logits) | 2 classes, label unique |
 | Classification multi-classe | nn.CrossEntropyLoss() | Aucune (logits) | N classes mutuellement exclusives |
 | Classification multi-labels | nn.BCEWithLogitsLoss() | Aucune (logits) | Plusieurs labels simultanés |
-| Régression | nn.MSELoss() ou nn.L1Loss() | Aucune (linéaire) | Prédiction de valeurs continues |
+| Régression | nn.MSELoss() ou nn.L1Loss() | Aucune (linéaire) | Valeurs continues |
 
-**Attention :** BCEWithLogitsLoss attend des logits (pas de sigmoïde en sortie). CrossEntropyLoss attend des logits (pas de softmax). Appliquer sigmoïde/softmax avant ces loss fonctions est une erreur fréquente.
+**Attention :** BCEWithLogitsLoss attend logits (pas sigmoïde). CrossEntropyLoss attend logits (pas softmax). Sigmoïde/softmax avant = erreur.
 
 ## **4.2 Gestion du déséquilibre des classes** {#4.2-gestion-du-déséquilibre-des-classes}
 
-Le déséquilibre des classes est un problème récurrent en deep learning appliqué. Plusieurs stratégies peuvent être combinées :
+Déséquilibre = problème récurrent. Stratégies combinables :
 
-* Pondération de la loss : calculer les poids inversement proportionnels à la fréquence de chaque classe (paramètre weight de CrossEntropyLoss ou pos\_weight de BCEWithLogitsLoss).
+* Pondération loss : poids inversement proportionnels fréquence classe (weight CrossEntropyLoss ou pos_weight BCEWithLogitsLoss).
 
-* Suréchantillonnage de la classe minoritaire : SMOTE (données tabulaires), augmentation ciblée (images).
+* Suréchantillonnage minoritaire : SMOTE (données tabulaires), augmentation ciblée (images).
 
-* Sous-échantillonnage de la classe majoritaire : à utiliser avec précaution (perte d’information).
+* Sous-échantillonnage majoritaire : avec prudence (perte info).
 
-* Focal Loss : variante de la BCE qui réduit le poids des exemples faciles. Utile pour les déséquilibres sévères.
+* Focal Loss : variante BCE réduit poids exemples faciles. Déséquilibres sévères.
 
 ## **4.3 Optimiseurs** {#4.3-optimiseurs}
 
-| Optimiseur | Learning rate typique | Avantages | Cas d’usage |
+| Optimiseur | Learning rate typique | Avantages | Cas d'usage |
 | ----- | :---: | :---: | :---: |
-| SGD \+ Momentum | 0.01 à 0.1 | Bonne généralisation | CNN avec transfert, entraînement long |
-| Adam | 1e-3 à 1e-4 | Convergence rapide, adaptatif | Défaut pour la plupart des cas |
-| AdamW | 1e-3 à 1e-4 | Adam \+ weight decay découplé | Fine-tuning de modèles pré-entraînés |
-| RMSProp | 1e-3 | Bon pour les RNN | Séquences, gradients instables |
+| SGD + Momentum | 0.01-0.1 | Bonne généralisation | CNN transfert, long entraînement |
+| Adam | 1e-3 à 1e-4 | Convergence rapide, adaptatif | Défaut plupart cas |
+| AdamW | 1e-3 à 1e-4 | Adam + weight decay découplé | Fine-tuning pré-entraînés |
+| RMSProp | 1e-3 | Bon RNN | Séquences, gradients instables |
 
 ## **4.4 Schedulers de learning rate** {#4.4-schedulers-de-learning-rate}
 
-Le scheduler ajuste le learning rate au cours de l’entraînement pour améliorer la convergence :
+Scheduler ajuste lr entraînement :
 
-* StepLR : réduit le lr d’un facteur gamma tous les step\_size époques. Simple et efficace.
+* StepLR : réduit lr facteur gamma tous step_size époque. Simple, efficace.
 
-* ReduceLROnPlateau : réduit le lr quand la métrique de validation stagne. Recommandé comme défaut.
+* ReduceLROnPlateau : réduit lr métrique validation stagne. Défaut recommandé.
 
-* CosineAnnealingLR : décroissance en cosinus. Populaire pour le fine-tuning.
+* CosineAnnealingLR : décroissance cosinus. Fine-tuning populaire.
 
-* OneCycleLR : monte puis descend le lr en un cycle. Peut accélérer la convergence.
+* OneCycleLR : monte puis descend lr cycle unique. Peut accélérer convergence.
 
 ## **4.5 Régularisation** {#4.5-régularisation}
 
-| Technique | Où l’appliquer | Paramètres | Effet |
+| Technique | Où l'appliquer | Paramètres | Effet |
 | ----- | :---: | :---: | :---: |
-| Dropout | Après les couches denses/LSTM | p \= 0.2 à 0.5 | Désactive des neurones aléatoirement |
-| Batch Normalization | Après Conv/Linear, avant ou après ReLU | momentum=0.1 | Normalise les activations par batch |
-| Weight Decay (L2) | Via l’optimiseur | 1e-4 à 1e-2 | Pénalise les grands poids |
-| Early Stopping | Boucle d’entraînement | patience \= 5 à 15 | Arrête quand val\_loss stagne |
-| Data Augmentation | Pipeline de données (train) | Variable | Augmente la diversité virtuelle |
-| Label Smoothing | Fonction de perte | ε \= 0.1 | Adoucit les cibles (moins de confiance) |
+| Dropout | Après couches denses/LSTM | p = 0.2-0.5 | Désactive neurones aléatoirement |
+| Batch Normalization | Après Conv/Linear, avant/après ReLU | momentum=0.1 | Normalise activations batch |
+| Weight Decay (L2) | Via optimiseur | 1e-4 à 1e-2 | Pénalise grands poids |
+| Early Stopping | Boucle entraînement | patience = 5-15 | Arrête val_loss stagne |
+| Data Augmentation | Pipeline train | Variable | Augmente diversité virtuelle |
+| Label Smoothing | Fonction perte | ε = 0.1 | Adoucit cibles (moins confiance) |
 
 # **5\. Guide des hyperparammètres** {#5.-guide-des-hyperparammètres}
 
@@ -389,168 +388,168 @@ Le scheduler ajuste le learning rate au cours de l’entraînement pour amélior
 
 | Hyperparammètre | Plage de recherche | Défaut recommandé |
 | ----- | :---: | :---: |
-| Nombre de couches cachées | 2 à 4 | 3 |
-| Neurones par couche | 32 à 512 | 128, 64, 32 (entonnoir) |
+| Nb couches cachées | 2-4 | 3 |
+| Neurones/couche | 32-512 | 128, 64, 32 (entonnoir) |
 | Learning rate | 1e-4 à 1e-2 | 1e-3 (Adam) |
-| Batch size | 32 à 256 | 64 |
-| Dropout | 0.1 à 0.5 | 0.3 |
-| Époques | 50 à 200 | 100 \+ early stopping |
+| Batch size | 32-256 | 64 |
+| Dropout | 0.1-0.5 | 0.3 |
+| Époques | 50-200 | 100 + early stopping |
 | Weight decay | 0 à 1e-2 | 1e-4 |
 
 ### **5.1.2 CNN** {#5.1.2-cnn}
 
 | Hyperparammètre | Plage de recherche | Défaut recommandé |
 | ----- | :---: | :---: |
-| Nombre de blocs convolutifs | 3 à 6 | 4 |
-| Filtres par bloc | 16 à 512 | 32, 64, 128, 256 (doublement) |
-| Taille du noyau | 3×3, 5×5, 7×7 | 3×3 (standard) |
-| Learning rate (from scratch) | 1e-3 à 1e-2 | 1e-3 |
+| Nb blocs convolutifs | 3-6 | 4 |
+| Filtres/bloc | 16-512 | 32, 64, 128, 256 (doublement) |
+| Taille noyau | 3×3, 5×5, 7×7 | 3×3 |
+| Learning rate (scratch) | 1e-3 à 1e-2 | 1e-3 |
 | Learning rate (fine-tuning) | 1e-5 à 1e-4 | 1e-4 |
-| Batch size | 16 à 64 | 32 |
-| Époques | 20 à 100 | 50 \+ early stopping |
-| Augmentation | Légère à agressive | Modérée |
+| Batch size | 16-64 | 32 |
+| Époques | 20-100 | 50 + early stopping |
+| Augmentation | Légère-agressive | Modérée |
 
 ### **5.1.3 RNN / LSTM / GRU** {#5.1.3-rnn-/-lstm-/-gru}
 
 | Hyperparammètre | Plage de recherche | Défaut recommandé |
 | ----- | :---: | :---: |
-| Hidden size | 32 à 512 | 128 |
-| Nombre de couches | 1 à 4 | 2 |
-| Bidirectionnel | True / False | True |
-| Dropout inter-couches | 0.1 à 0.5 | 0.3 |
+| Hidden size | 32-512 | 128 |
+| Nb couches | 1-4 | 2 |
+| Bidirectionnel | True/False | True |
+| Dropout inter-couches | 0.1-0.5 | 0.3 |
 | Learning rate | 1e-4 à 1e-2 | 1e-3 |
-| Gradient clipping | 0.5 à 5.0 | 1.0 |
-| Longueur de séquence | Dépend du signal | 1000 (après rééchantillonnage) |
+| Gradient clipping | 0.5-5.0 | 1.0 |
+| Longueur séquence | Dépend signal | 1000 (après rééchantillonnage) |
 
-## **5.2 Stratégies de recherche d’hyperparammètres** {#5.2-stratégies-de-recherche-d’hyperparammètres}
+## **5.2 Stratégies de recherche d'hyperparammètres** {#5.2-stratégies-de-recherche-d'hyperparammètres}
 
-* Grid Search : exhaustif mais coûteux. Réserver pour 2–3 hyperparammètres avec peu de valeurs.
+* Grid Search : exhaustif, coûteux. Réserver 2-3 hyperparamètres, peu valeurs.
 
-* Random Search : plus efficace que le grid search pour des espaces larges. 50–100 itérations.
+* Random Search : efficace espaces larges. 50-100 itérations.
 
-* Recherche manuelle guidée : commencer par les défauts, varier un paramètre à la fois. Approche pragmatique recommandée pour les projets étudiants.
+* Recherche manuelle guidée : défauts → varier un paramètre fois. Pragmatique projet étudiants.
 
-**Conseil :** Commencer par le learning rate (le plus impactant), puis batch size, puis profondeur, puis régularisation. Toujours fixer un seed pour la reproductibilité.
+**Conseil :** Débuter learning rate (impact maximal), puis batch size, profondeur, régularisation. Fixer seed reproductibilité.
 
-# **6\. Métriques d’évaluation** {#6.-métriques-d’évaluation}
+# **6\. Métriques d'évaluation** {#6.-métriques-d'évaluation}
 
 ## **6.1 Métriques de classification** {#6.1-métriques-de-classification}
 
-| Métrique | Formule / Description | Quand l’utiliser |
+| Métrique | Formule / Description | Quand l'utiliser |
 | ----- | :---: | :---: |
-| Accuracy | TP \+ TN / Total | Classes équilibrées uniquement |
-| Précision | TP / (TP \+ FP) | Coût élevé des faux positifs |
-| Rappel (Sensibilité) | TP / (TP \+ FN) | Coût élevé des faux négatifs (médical) |
-| F1-Score | 2 × (Précision × Rappel) / (Précision \+ Rappel) | Compromis précision/rappel |
-| AUC-ROC | Aire sous la courbe ROC | Métrique globale de discrimination |
-| Matrice de confusion | Tableau TP/TN/FP/FN | Analyse détaillée des erreurs |
-| Macro F1 | Moyenne des F1 par classe | Classes multiples déséquilibrées |
-| Spécificité | TN / (TN \+ FP) | Taux de vrais négatifs |
+| Accuracy | TP + TN / Total | Classes équilibrées uniquement |
+| Précision | TP / (TP + FP) | Coût élevé faux positifs |
+| Rappel (Sensibilité) | TP / (TP + FN) | Coût élevé faux négatifs (médical) |
+| F1-Score | 2 × (Précision × Rappel) / (Précision + Rappel) | Compromis précision/rappel |
+| AUC-ROC | Aire courbe ROC | Métrique globale discrimination |
+| Matrice confusion | Tableau TP/TN/FP/FN | Analyse détaillée erreurs |
+| Macro F1 | Moyenne F1/classe | Classes multiples déséquilibrées |
+| Spécificité | TN / (TN + FP) | Taux vrais négatifs |
 
-**Attention :** En médecine, le rappel (sensibilité) est souvent plus critique que la précision. Un faux négatif (maladie non détectée) est généralement plus dangereux qu’un faux positif (examen supplémentaire inutile).
+**Attention :** Médecine → rappel (sensibilité) critique. Faux négatif (maladie non détectée) > faux positif (examen inutile).
 
 ## **6.2 Visualisations obligatoires** {#6.2-visualisations-obligatoires}
 
-Chaque expérience doit produire les visualisations suivantes :
+Chaque expérience doit produire :
 
-1. Courbes d’apprentissage : loss et métrique principale (accuracy, F1) sur train et validation en fonction des époques. Permet de diagnostiquer l’overfitting/underfitting.
+1. Courbes apprentissage : loss + métrique principale (accuracy, F1) train/validation vs époque. Diagnostique overfitting/underfitting.
 
-2. Matrice de confusion : sur le test set, normalisée ou non. Identifie les confusions inter-classes.
+2. Matrice confusion : test set, normalisée/non. Identifie confusions inter-classes.
 
-3. Courbe ROC et AUC : pour chaque classe en classification binaire/multi-classe.
+3. Courbe ROC et AUC : chaque classe binaire/multi-classe.
 
-4. Tableau récapitulatif : toutes les configurations testées avec leurs hyperparammètres et métriques.
+4. Tableau récapitulatif : configurations testées, hyperparamètres, métriques.
 
-## **6.3 Diagnostic par les courbes d’apprentissage** {#6.3-diagnostic-par-les-courbes-d’apprentissage}
+## **6.3 Diagnostic par les courbes d'apprentissage** {#6.3-diagnostic-par-les-courbes-d'apprentissage}
 
 | Observation | Diagnostic | Action corrective |
 | ----- | :---: | :---: |
-| train\_loss ↓↓, val\_loss ↓ puis ↑ | Overfitting | Augmenter dropout, réduire modèle, early stopping |
-| train\_loss ↓ lent, val\_loss ↓ lent | Underfitting | Augmenter le modèle, réduire régularisation, augmenter lr |
-| train\_loss et val\_loss stagnent haut | Modèle trop simple ou lr trop faible | Augmenter capacité ou lr |
-| train\_loss et val\_loss ↓ ensemble | Bon entraînement | Continuer, surveiller la divergence |
-| val\_loss oscille fortement | Learning rate trop élevé ou batch trop petit | Réduire lr, augmenter batch size |
+| train_loss ↓↓, val_loss ↓ puis ↑ | Overfitting | Augmenter dropout, réduire modèle, early stopping |
+| train_loss ↓ lent, val_loss ↓ lent | Underfitting | Augmenter modèle, réduire régularisation, augmenter lr |
+| train_loss/val_loss stagnent haut | Modèle trop simple ou lr faible | Augmenter capacité ou lr |
+| train_loss/val_loss ↓ ensemble | Bon entraînement | Continuer, surveiller divergence |
+| val_loss oscille fortement | Learning rate trop haut ou batch petit | Réduire lr, augmenter batch size |
 
 # **7\. Interprétabilité des modèles** {#7.-interprétabilité-des-modèles}
 
-L’interprétabilité est un enjeu majeur en deep learning appliqué, particulièrement dans les domaines critiques (santé, finance, sécurité). Un modèle performant mais opaque est difficilement adoptable en pratique clinique.
+Interprétabilité = enjeu majeur deep learning appliqué. Critique domaines critiques (santé, finance, sécurité). Modèle performant opaque = difficilement adoptable pratique clinique.
 
-| Architecture | Méthode d’interprétation | Ce qu’elle révèle |
+| Architecture | Méthode d'interprétation | Ce qu'elle révèle |
 | ----- | :---: | :---: |
-| MLP | Permutation Feature Importance | Quelles variables influencent le plus la prédiction |
-| MLP | SHAP (SHapley Additive exPlanations) | Contribution de chaque variable par prédiction |
-| CNN | Grad-CAM | Quelles régions spatiales activent la décision |
-| CNN | Saliency Maps | Gradients de la sortie par rapport aux pixels d’entrée |
-| CNN | Occlusion Sensitivity | Effet de masquer différentes régions |
-| RNN/LSTM | Attention Weights | Quels timesteps reçoivent le plus d’attention |
-| RNN/LSTM | Gradient par rapport à l’entrée | Quels segments du signal sont discriminants |
-| Tous | t-SNE / UMAP des embeddings | Visualisation de l’espace latent appris |
+| MLP | Permutation Feature Importance | Variables influencent prédiction |
+| MLP | SHAP (SHapley Additive exPlanations) | Contribution variable/prédiction |
+| CNN | Grad-CAM | Régions spatiales activent décision |
+| CNN | Saliency Maps | Gradients sortie/pixels entrée |
+| CNN | Occlusion Sensitivity | Effet masquer régions |
+| RNN/LSTM | Attention Weights | Timesteps reçoivent attention |
+| RNN/LSTM | Gradient/entrée | Segments signal discriminants |
+| Tous | t-SNE / UMAP embeddings | Visualisation espace latent |
 
-**Conseil :** Inclure au moins une méthode d’interprétation par architecture dans le rapport. Discuter la cohérence des résultats avec les connaissances du domaine.
+**Conseil :** Inclure ≥1 méthode interprétation/architecture rapport. Discuter cohérence résultats connaissances domaine.
 
 # **8\. Bonnes pratiques et erreurs fréquentes** {#8.-bonnes-pratiques-et-erreurs-fréquentes}
 
 ## **8.1 Checklist avant entraînement** {#8.1-checklist-avant-entraînement}
 
-1. Seed fixé (torch.manual\_seed, np.random.seed, random.seed) pour la reproductibilité.
+1. Seed fixé (torch.manual_seed, np.random.seed, random.seed) reproductibilité.
 
-2. Data leakage vérifié : aucune fuite d’information du test vers le train.
+2. Data leakage vérifié : fuite info test → train.
 
-3. Dimensions vérifiées : input shape, output shape, nombre de classes.
+3. Dimensions vérifiées : input shape, output shape, nb classes.
 
-4. Baseline établie : modèle simple (régression logistique, prédiction majoritaire) comme référence.
+4. Baseline établie : modèle simple (régression logistique, majorité) référence.
 
-5. GPU disponible : torch.cuda.is\_available(), device \= torch.device(’cuda’ if available).
+5. GPU disponible : torch.cuda.is_available(), device = torch.device('cuda' si available).
 
-6. DataLoader configuré : shuffle=True pour train, shuffle=False pour val/test, num\_workers adapté.
+6. DataLoader configuré : shuffle=True train, shuffle=False val/test, num_workers adapté.
 
 ## **8.2 Erreurs fréquentes** {#8.2-erreurs-fréquentes}
 
 | Erreur | Conséquence | Solution |
 | ----- | :---: | :---: |
-| Oublier model.eval() en évaluation | Dropout et BN actifs → métriques faussées | Toujours model.eval() \+ torch.no\_grad() |
-| Softmax avant CrossEntropyLoss | Double application → convergence dégradée | CrossEntropyLoss attend des logits bruts |
-| Normaliser sur tout le dataset | Data leakage → métriques optimistes | Fitter le scaler sur train uniquement |
-| Ignorer le déséquilibre des classes | Modèle biaisé vers la classe majoritaire | Pondération de la loss, SMOTE, augmentation |
-| Batch size trop grand | Mauvaise généralisation | 32 à 64 par défaut |
-| Pas de gradient clipping (RNN) | Explosion du gradient → NaN | torch.nn.utils.clip\_grad\_norm\_(max\_norm=1.0) |
-| Oublier optimizer.zero\_grad() | Accumulation de gradients → instabilité | Appeler en début de chaque itération |
-| Pas d’early stopping | Surapprentissage non détecté | Monitorer val\_loss, patience=5–15 |
+| Oublier model.eval() évaluation | Dropout/BN actifs → métriques fausses | model.eval() + torch.no_grad() toujours |
+| Softmax avant CrossEntropyLoss | Double application → convergence dégradée | CrossEntropyLoss attend logits bruts |
+| Normaliser sur dataset entier | Data leakage → métriques optimistes | Fitter scaler train uniquement |
+| Ignorer déséquilibre classes | Modèle biaisé classe majoritaire | Pondération loss, SMOTE, augmentation |
+| Batch size trop grand | Mauvaise généralisation | 32-64 défaut |
+| Pas gradient clipping (RNN) | Explosion gradient → NaN | torch.nn.utils.clip_grad_norm_(max_norm=1.0) |
+| Oublier optimizer.zero_grad() | Accumulation gradients → instabilité | Appeler début chaque itération |
+| Pas early stopping | Surapprentissage non détecté | Monitorer val_loss, patience=5-15 |
 
-## **8.3 Structure type du code d’entraînement** {#8.3-structure-type-du-code-d’entraînement}
+## **8.3 Structure type du code d'entraînement** {#8.3-structure-type-du-code-d'entraînement}
 
-Chaque notebook ou script d’entraînement doit suivre cette structure logique :
+Chaque notebook/script entraînement doit suivre logique :
 
-1. Imports et configuration (device, seeds, hyperparammètres).
+1. Imports + configuration (device, seeds, hyperparamètres).
 
-2. Chargement et exploration des données.
+2. Chargement + exploration données.
 
-3. Prétraitement et création des DataLoaders.
+3. Prétraitement + création DataLoaders.
 
-4. Définition du modèle (classe héritant de nn.Module).
+4. Définition modèle (classe héritant nn.Module).
 
-5. Définition de la loss, de l’optimiseur et du scheduler.
+5. Définition loss, optimiseur, scheduler.
 
-6. Boucle d’entraînement avec logging (train\_loss, val\_loss, métriques par époque).
+6. Boucle entraînement logging (train_loss, val_loss, métriques/époque).
 
-7. Évaluation sur le test set (une seule fois, après sélection du meilleur modèle).
+7. Évaluation test set (une seule fois, après sélection meilleur modèle).
 
 8. Visualisations (courbes, matrices, Grad-CAM, etc.).
 
-9. Analyse critique et conclusions.
+9. Analyse critique + conclusions.
 
 # **9\. Guide de rédaction du rapport** {#9.-guide-de-rédaction-du-rapport}
 
-Le rapport constitue le livrable principal du projet. Il doit démontrer la compréhension théorique, la rigueur expérimentale et la capacité d’analyse critique de l’étudiant.
+Rapport = livrable principal projet. Doit démontrer compréhension théorique, rigueur expérimentale, capacité analyse critique.
 
 ## **9.1 Structure attendue** {#9.1-structure-attendue}
 
 | Section | Contenu attendu | Pages estimées |
 | ----- | :---: | :---: |
-| Page de garde | Titre, auteur, encadrant, filière, année | 1 |
-| Table des matières | Générée automatiquement | 1 |
+| Page garde | Titre, auteur, encadrant, filière, année | 1 |
+| Table matières | Générée automatiquement | 1 |
 | Introduction | Contexte, problématique, objectifs, plan | 1–2 |
-| Cadre théorique | Fondements mathématiques de chaque architecture | 3–5 |
+| Cadre théorique | Fondements mathématiques chaque architecture | 3–5 |
 | Partie expérimentale | Dataset, prétraitement, architecture, résultats, analyse | 8–15 (par partie) |
 | Discussion transversale | Comparaison architectures, adéquation données-modèle | 2–3 |
 | Impact sociétal / Éthique | Implications, biais, limites, contexte local | 1–2 |
@@ -560,27 +559,27 @@ Le rapport constitue le livrable principal du projet. Il doit démontrer la comp
 
 ## **9.2 Critères de qualité rédactionnelle** {#9.2-critères-de-qualité-rédactionnelle}
 
-* Précision : chaque affirmation technique doit être justifiée (formule, référence, résultat expérimental).
+* Précision : chaque affirmation technique = justifiée (formule, référence, résultat expérimental).
 
-* Clarté : éviter les phrases vagues ("le modèle fonctionne bien"). Quantifier systématiquement.
+* Clarté : éviter phrases vagues ("modèle fonctionne bien"). Quantifier.
 
-* Esprit critique : ne pas se limiter à rapporter les résultats. Analyser les échecs, discuter les limites, proposer des améliorations.
+* Esprit critique : pas limit rapporter résultats. Analyser échecs, discuter limites, proposer améliorations.
 
-* Cohérence : le fil conducteur (problématique) doit être visible tout au long du rapport.
+* Cohérence : fil conducteur (problématique) visible tout rapport.
 
-* Références : citer les articles fondateurs des architectures utilisées (LeCun, Hochreiter, He, etc.).
+* Références : citer articles fondateurs architectures (LeCun, Hochreiter, He, etc.).
 
-## **9.3 Ce qu’il faut éviter** {#9.3-ce-qu’il-faut-éviter}
+## **9.3 Ce qu'il faut éviter** {#9.3-ce-qu'il-faut-éviter}
 
-* Copier-coller du code sans explication. Le code doit être commenté et justifié dans le texte.
+* Copier-coller code sans explication. Code doit être commenté, justifié texte.
 
-* Présenter des résultats sans analyse. Un tableau de métriques seul ne constitue pas une analyse.
+* Présenter résultats sans analyse. Tableau métriques seul ≠ analyse.
 
-* Ignorer les mauvais résultats. Un modèle qui échoue est aussi instructif qu’un modèle performant, à condition d’analyser pourquoi.
+* Ignorer mauvais résultats. Modèle échoue = instructif, à condition analyser pourquoi.
 
-* Utiliser l’accuracy comme unique métrique sur des classes déséquilibrées.
+* Accuracy métrique unique classes déséquilibrées.
 
-* Omettre les détails de reproductibilité : seeds, versions de librairies, hyperparammètres.
+* Ommettre détails reproductibilité : seeds, versions librairies, hyperparamètres.
 
 # **10\. Références bibliographiques recommandées** {#10.-références-bibliographiques-recommandées}
 
